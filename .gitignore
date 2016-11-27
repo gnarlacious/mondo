@@ -1,0 +1,5 @@
+.DS_Store
+config.json
+.sass-cache
+node_modules
+./src/config.yml
