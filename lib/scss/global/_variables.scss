@@ -1,0 +1,15 @@
+////
+/// @group Settings
+////
+
+/// Base font size. Html is set to 65.5% making 1.6rem = 16px
+$font-size-base: 1.6rem;
+
+/// The height of the main header
+$header-height: 60px;
+
+// For-media mixin variables
+$phone-boundary: 600px;
+$tablet-portrait-boundary: 900px;
+$tablet-landscape-boundary: 1200px;
+$desktop-boundary: 1800px;

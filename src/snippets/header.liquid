@@ -1,0 +1,46 @@
+<header class="header header--auto-hide">
+	{% comment %}
+		Note on checkout link: it is a good idea to avoid linking to /checkout directly because shops that use
+		Paypal Express Checkout and/or Google Checkout have special checkout buttons on the /cart page. Also,
+		special instructions for the seller are entered on the /cart page. Finally, the universal tracking code
+		of Google Analytics may not work if linking directly to the /checkout page.
+
+{% endcomment %}
+{% comment %}
+	<a href="/cart">{{ cart.item_count }} {{ cart.item_count | pluralize: 'item', 'items' }} ({{ cart.total_price | money }})</a>
+
+	{% if shop.customer_accounts_enabled %}
+		{% if customer %}
+			Logged in as <a href="/account">{{ customer.first_name }}</a> · {{ 'Log out' | customer_logout_link }}
+		{% else %}
+			{{ 'Log in' | customer_login_link }}
+			{% if shop.customer_accounts_optional %}
+			or {{ 'Create an account' | customer_register_link }}
+			{% endif %}
+		{% endif %}
+	{% endif %}
+	{% endcomment %}
+
+	{% comment %}
+		It would be nice if the logo was a shop setting, rather than a theme setting.
+		But for now, it is a theme setting. The shop logo is uploaded on the theme settings page.
+		Link to the theme settings page of currently published theme will always be:
+		http://www.shopify.com/admin/themes/current/settings.
+		To add theme settings to a theme, see this: http://docs.shopify.com/themes/theme-templates/settings
+		Theme settings are added to http://www.shopify.com/admin/themes/current#config/settings.html
+	{% endcomment %}
+
+	<div class="header__brand">
+		{% if settings.brand %}
+			<a href="/">{{ settings.brand | image_url | img_tag: shop.name }}</a>
+		{% else %}
+			<a href="/">{{ shop.name }}</a>
+		{% endif %}
+	</div>
+
+	{% comment %}
+		Main Navigation
+	{% endcomment %}
+	{% include 'site-nav' %}
+
+</header>

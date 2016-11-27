@@ -8,8 +8,14 @@
   A word on sub-categories: Shopify manages sub-categories using product tags: http://docs.shopify.com/manual/configuration/store-customization/page-specific/collections/subcategories
 {% endcomment %}
 
-<nav role="navigation">
-  <ul>
+<nav class="header__nav" role="navigation">
+	<a href="#siteNav" class="header__nav-trigger">
+		<span>
+			<em aria-hidden="true"></em>
+			Menu
+		</span><!-- .header__nav-trigger -->
+	</a>
+  <ul id="siteNav">
     {% for link in linklists.main-menu.links %}
     {% assign has_sub_menu = false %}
     {% assign has_sub_categories = false %}
@@ -28,7 +34,7 @@
       {% assign has_sub_categories = true %}
     {% endif %}
     <li class="{% if link.active or parent_link_active %} active{% endif %}{% if has_sub_menu or has_sub_categories %} has-dropdown{% endif %}{% if forloop.first %} first{% elsif forloop.last %} last{% endif %}">
-      <a href="{{ link.url }}">{{ link.title }}{% if has_sub_menu or has_sub_categories %} <i class="fa fa-angle-down"></i>{% endif %}</a> 
+      <a href="{{ link.url }}">{{ link.title }}{% if has_sub_menu or has_sub_categories %} <i class="fa fa-angle-down"></i>{% endif %}</a>
       {% if has_sub_menu or has_sub_categories %}
       <ul>
         {% if has_sub_menu %}

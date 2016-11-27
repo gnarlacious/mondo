@@ -1,0 +1,43 @@
+// Mixins
+// ----------
+
+/// @content The media mixin has a strict number of types that can be passed through
+/// @param {text} range
+/// The $range will be replaced with different screent types
+/// @example scss - for-media - Basic usage:
+///  @include for-media(desktop-up);
+/// @link https://medium.freecodecamp.com/the-100-correct-way-to-do-css-breakpoints-88d6a5ba1862#.qpges9do4
+@mixin for-media($range) {
+  @if $range == phone-only {
+    @media (max-width: #{$phone-boundary - 1}) { @content; }
+  } @else if $range == tablet-portrait-up {
+    @media (min-width: $phone-boundary) { @content; }
+  } @else if $range == tablet-portait-only {
+    @media (min-width: $phone-boundary) and (max-width: #{$tablet-portrait-boundary - 1}) { @content; }
+  } @else if $range == tablet-landscape-up {
+    @media (min-width: $tablet-landscape-boundary) { @content; }
+  } @else if $range == tablet-landscape-only {
+    @media (min-width: $tablet-portrait-boundary) and (max-width: $tablet-landscape-boundary - 1px) { @content; }
+  } @else if $range == desktop-up {
+    @media (min-width: $tablet-landscape-boundary) { @content; }
+  } @else if $range == desktop-only {
+    @media (min-width: $tablet-landscape-boundary) and (max-width: $desktop-boundary - 1px) { @content; }
+  } @else if $range == big-desktop-up {
+    @media (min-width: $desktop-boundary) { @content; }
+  }
+}
+
+@function shade(
+    $color,
+    $percent
+  ) {
+
+  @return mix(#000, $color, $percent);
+}
+@function tint(
+    $color,
+    $percent
+  ) {
+
+  @return mix(#fff, $color, $percent);
+}

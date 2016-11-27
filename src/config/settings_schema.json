@@ -1,15 +1,25 @@
 [
+	{
+    "name": "theme_info",
+    "theme_name": "Gnarlacious",
+    "theme_author": "Dustin Delatore",
+    "theme_version": "1.0.0",
+    "theme_documentation_url": "https:\/\/gnarlacious.com\/",
+    "theme_support_url": "https:\/\/gnarlacious.com\//"
+  },
   {
-    "name": "Welcome",
+    "name": "Brand",
     "settings": [
       {
-        "type": "paragraph",
-        "content": "Theme settings allow designers to provide an easy way for any user to customize the look and feel of their shop without having to delve into HTML or CSS code. Please see our [help page on theme settings](http:\/\/docs.shopify.com\/themes\/theme-templates\/settings) to learn more about how you can make your theme customizable."
+        "type": "image_picker",
+				"id": "brand",
+				"label": "Logo Image",
+				"info": "Will be used in main header"
       }
     ]
   },
   {
-    "name": "Example setting",
+    "name": "Base Styles",
     "settings": [
       {
         "type": "header",

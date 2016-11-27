@@ -1,2 +1,8 @@
-
+// Global ============
 @import 'normalize';
+@import 'global/variables';
+@import 'global/mixins';
+@import 'global/base';
+
+// Modules ===========
+@import 'modules/header';

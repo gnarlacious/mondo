@@ -1,0 +1,199 @@
+// Main header
+// ======≠========
+.header {
+	height: $header-height;
+	border-bottom: solid 1px shade(#FFFFFF, 5%);
+	background-color: #FFF;
+	&--auto-hide {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		transform: translateZ(0);
+		will-change: transform;
+		transition: transform .5s;
+	}
+	&--is-hidden {
+		transform: translateY(-100%);
+	}
+}
+
+.header__brand,
+.header__nav-trigger {
+	position: absolute;
+}
+
+.header__brand {
+	left: 5%;
+	max-height: $header-height;
+	a, img {
+		display: block;
+	}
+	img {
+		max-width: 100%;
+		max-height: $header-height;
+	}
+}
+
+.header__nav-open .header__nav-trigger {
+	em {
+		/* transform menu icon into a 'X' icon */
+		background-color: rgba(#25283D, 0);
+	}
+
+	em::before {
+		/* rotate top line */
+		transform: rotate(-45deg);
+	}
+
+	em::after {
+		/* rotate bottom line */
+		transform: rotate(45deg);
+	}
+}
+
+.header__nav-trigger {
+	/* vertically align its content */
+	display: table;
+	height: 100%;
+	padding: 0 1em;
+	font-size: 1.2rem;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: #25283D;
+	font-weight: bold;
+	right: 0;
+	border-left: 1px solid shade(#FFFFFF, 5%);
+
+	span {
+		/* vertically align inside parent element */
+		display: table-cell;
+		vertical-align: middle;
+	}
+
+	em, em::after, em::before {
+		/* this is the menu icon */
+		display: block;
+		position: relative;
+		height: 2px;
+		width: 22px;
+		background-color: #25283D;
+		backface-visibility: hidden;
+	}
+
+	em {
+		/* this is the menu central line */
+		margin: 6px auto 14px;
+		transition: background-color .2s;
+	}
+
+	em::before, em::after {
+		position: absolute;
+		content: '';
+		left: 0;
+		transition: transform .2s;
+	}
+
+	em::before {
+		/* this is the menu icon top line */
+		transform: translateY(-6px);
+	}
+
+	em::after {
+		/* this is the menu icon bottom line */
+		transform: translateY(6px);
+	}
+	@include for-media(tablet-landscape-up) {
+		display: none;
+	}
+}
+
+.header__nav {
+	display: inline-block;
+	float: right;
+	height: 100%;
+	padding-right: 5%;
+
+	> ul {
+		position: absolute;
+		z-index: 2;
+		top: $header-height;
+		padding: 0;
+		margin: 0;
+		left: 0;
+		width: 100%;
+		background-color: #FFFFFF;
+		display: none;
+		list-style-type: none;
+		box-shadow: 0 14px 20px rgba(#000, .2);
+
+		a {
+			/* target primary-nav links */
+			display: block;
+			height: 50px;
+			line-height: 50px;
+			padding-left: 5%;
+			color: #25283D;
+			font-size: 1.8rem;
+			text-decoration: none;
+			border-top: 1px solid shade(#FFFFFF, 5%);
+
+			&:hover, &.active {
+				color: #8F3985;
+			}
+		}
+	}
+	@include for-media(tablet-landscape-up) {
+		/* vertically align its content */
+		display: table;
+
+		> ul {
+			/* vertically align inside parent element */
+			display: table-cell;
+			vertical-align: middle;
+			/* reset mobile style */
+			position: relative;
+			width: auto;
+			top: 0;
+			padding: 0;
+			&::after {
+		    clear: both;
+		    content: "";
+		    display: block;
+		  }
+			background-color: transparent;
+			box-shadow: none;
+
+			li {
+				display: inline-block;
+				float: left;
+				margin-right: 1.5em;
+
+				&:last-of-type {
+					margin-right: 0;
+				}
+			}
+
+			a {
+				/* reset mobile style */
+				height: auto;
+				line-height: normal;
+				padding: 0;
+				border: none;
+			}
+		}
+	}
+}
+
+.header__nav-open .header__nav ul,
+.header__nav ul:target {
+	/*
+		show primary nav - mobile only
+		:target is used to show navigation on no-js devices
+	*/
+	display: block;
+
+	@include for-media(tablet-landscape-up) {
+		display: table-cell;
+	}
+}
