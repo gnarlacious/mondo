@@ -10,7 +10,7 @@
 
   {% comment %}
     Collection sorting. Needs the JavaScript that is at the bottom of this file.
-  {% endcomment %}
+
   {% if collection.products_count > 1 %}
     <select class="sort-by right">
       <option value="manual">Featured</option>
@@ -23,13 +23,13 @@
       <option value="best-selling">Best Selling</option>
     </select>
   {% endif %}
-
+{% endcomment %}
   {% comment %}
     Listing all tags within the current collection.
     Shopify uses product tags to manage subcategories inside collections.
-    See 'How do I create subcategories of products?' at 
+    See 'How do I create subcategories of products?' at
     http://bit.ly/1j1Dti4 for details.
-  {% endcomment %}
+
 
   {% if collection.all_tags.size > 0 %}
     <ul>
@@ -46,21 +46,24 @@
             {{ tag | link_to_tag: tag }}
           </li>
         {% endif %}
-      {% endfor %}  
+      {% endfor %}
     </ul>
   {% endif %}
+	{% endcomment %}
 
   {% if collection.description.size > 0 %}
     {{ collection.description }}
   {% endif %}
+	<section class="gallery gallery--thirds">
 
   {% for product in collection.products %}
-    <ul>
+
       {% include 'product-item' %}
-    </ul>
+
   {% else %}
     <p>There are no products in this view.</p>
   {% endfor %}
+</section>
 
   {% if paginate.pages > 1 %}
     {{ paginate | default_pagination }}

@@ -1,8 +1,13 @@
-// Global ============
+// Vendor ============
 @import 'normalize';
+
+// Global ============
 @import 'global/variables';
 @import 'global/mixins';
 @import 'global/base';
 
 // Modules ===========
 @import 'modules/header';
+@import 'modules/footer';
+@import 'modules/product';
+@import 'modules/gallery';

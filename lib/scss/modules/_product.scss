@@ -1,0 +1,216 @@
+.product-item {
+	position: relative;
+	margin-bottom: 2em;
+	background: #fff;
+	border-radius: .5em;
+	> div {
+		overflow: hidden;
+	}
+	&::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		height: 100%;
+		width: 100%;
+		border-radius: .5em;
+		box-shadow: 0 1px 20px rgba(0, 0, 0, .1);
+		opacity: 0;
+		transition: opacity 0.4s ease-in-out;
+		z-index: -1;
+	}
+	&:hover::after {
+		opacity: 1;
+	}
+
+	@include for-media (tablet-landscape-up) {
+		> div {
+
+			.no-touch &:hover .cd-dots li.selected a {
+				/* Slider dots - change background-color of the selected dot when hover over the its parent list item */
+				background: $brand-black;
+				border-color: $brand-black;
+			}
+
+			.no-touch &:hover .cd-dots a {
+				/* Slider dots - change dot border-color when hover over the its parent list item */
+				border-color: lighten($brand-black, 40%);
+			}
+
+			.no-touch &:hover li.move-right,
+			.no-touch &:hover li.move-left {
+				/* show preview items when hover over the its parent list item */
+				opacity: 0.3;
+			}
+		}
+	}
+}
+.product-item__wrapper {
+	position: relative;
+	overflow: hidden;
+	margin: 3em 0;
+	padding: 0;
+
+	li {
+		position: absolute;
+		top: 0;
+		left: 25%;
+		height: 100%;
+		width: 50%;
+		opacity: 0;
+		list-style-type: none;
+
+		/* Force Hardware Acceleration */
+		transform: translateZ(0);
+		backface-visibility: hidden;
+		will-change: transform, opacity;
+
+		transform: translateX(200%) scale(0.7);
+		transition: transform 0.4s, opacity ,0.4s;
+
+		&.selected {
+			/* selected item */
+			position: relative;
+			opacity: 1;
+			transform: translateX(0) scale(1.3);
+		}
+
+		&.move-left {
+			/* item on left - preview visible */
+			transform: translateX(-100%) scale(0.7);
+			opacity: 0.3;
+		}
+
+		&.move-right {
+			/* item on right - preview visible */
+			transform: translateX(100%) scale(0.7);
+			opacity: 0.3;
+		}
+
+		&.hide-left {
+			/* items hidden on the left */
+			transform: translateX(-200%) scale(0.7);
+		}
+
+		img {
+			display: block;
+			width: 100%;
+		}
+	}
+
+	@include for-media(tablet-landscape-up) {
+		li.move-left,
+		li.move-right {
+			/* hide preview items */
+			opacity: 0;
+		}
+
+		li.focus-on-left {
+			/* class added to the .selected and .move-right items when user hovers over the .move-left item (item preview on the left) */
+			transform: translateX(3%) scale(1.25);
+
+
+			&.move-right {
+				transform: translateX(103%) scale(0.7);
+			}
+		}
+
+		li.focus-on-right {
+			/* class added to the .selected and .move-left items when user hovers over the .move-right item (item preview on the right) */
+			transform: translateX(-3%) scale(1.25);
+
+			&.move-left {
+				transform: translateX(-103%) scale(0.7);
+			}
+		}
+
+		li.hover {
+			/* class added to the preview items (.move-left or .move-right) when user hovers over them */
+			opacity: 1 !important;
+
+			&.move-left {
+				transform: translateX(-97%) scale(0.75);
+			}
+
+			&.move-right {
+				transform: translateX(97%) scale(0.75);
+			}
+		}
+	}
+}
+
+.product-item__dots {
+	/* not visible in the html document - created using jQuery */
+	position: absolute;
+	bottom: 95px;
+	@include center(x); // see partials > _mixins.scss
+	// @include clearfix;
+	padding: .2em;
+
+	li {
+		display: inline-block;
+		float: left;
+		margin: 0 5px;
+		pointer-events: none;
+
+		&.selected a {
+			background: $brand-black;
+			border-color: $brand-black;
+		}
+	}
+
+	a {
+		display: block;
+		height: 6px;
+		width: 6px;
+		border-radius: 50%;
+		border: 1px solid lighten($brand-black, 40%);
+
+		/* image replacement */
+		overflow: hidden;
+		text-indent: 100%;
+		white-space: nowrap;
+
+		transition: border-color .2s, background-color .2s;
+	}
+
+	@include for-media(tablet-landscape-up) {
+
+		li {
+			pointer-events: auto;
+
+			&.selected a {
+				background: darken($brand-white, 20%);
+				border-color: darken($brand-white, 20%);
+			}
+		}
+
+		a {
+			height: 8px;
+			width: 8px;
+			border-color: darken($brand-white, 20%);
+			/* fix a bug in IE9/10 - transparent anchor not clickable */
+			background-color: rgba($brand-white, 0);
+		}
+	}
+}
+
+.product-item__info {
+	display: flex;
+	justify-content: space-between;
+	height: 90px;
+	line-height: 90px;
+	padding: 0 2em;
+	font-weight: bold;
+	font-size: 2rem;
+
+	.product-item__price,
+	.product-item__new-price {
+		font-weight: bold;
+		font-size: 2rem;
+	}
+}
+
+.no-js .move-right,
+.no-js .move-left {
+	display: none;
+}

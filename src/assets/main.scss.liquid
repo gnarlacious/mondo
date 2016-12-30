@@ -451,14 +451,15 @@ html {
 }
 
 body {
+  padding-top: 80px;
   font-size: 1.6rem;
-  padding-top: 60px;
 }
 
 .header {
-  height: 60px;
+  height: 80px;
   border-bottom: solid 1px #f2f2f2;
   background-color: #FFF;
+  z-index: 3;
 }
 
 .header--auto-hide {
@@ -482,7 +483,7 @@ body {
 
 .header__brand {
   left: 5%;
-  max-height: 60px;
+  max-height: 80px;
 }
 
 .header__brand a, .header__brand img {
@@ -491,26 +492,22 @@ body {
 
 .header__brand img {
   max-width: 100%;
-  max-height: 60px;
+  max-height: 80px;
 }
 
 .header__nav-open .header__nav-trigger em {
-  /* transform menu icon into a 'X' icon */
   background-color: rgba(37, 40, 61, 0);
 }
 
 .header__nav-open .header__nav-trigger em::before {
-  /* rotate top line */
   transform: rotate(-45deg);
 }
 
 .header__nav-open .header__nav-trigger em::after {
-  /* rotate bottom line */
   transform: rotate(45deg);
 }
 
 .header__nav-trigger {
-  /* vertically align its content */
   display: table;
   height: 100%;
   padding: 0 1em;
@@ -524,13 +521,11 @@ body {
 }
 
 .header__nav-trigger span {
-  /* vertically align inside parent element */
   display: table-cell;
   vertical-align: middle;
 }
 
 .header__nav-trigger em, .header__nav-trigger em::after, .header__nav-trigger em::before {
-  /* this is the menu icon */
   display: block;
   position: relative;
   height: 2px;
@@ -541,7 +536,6 @@ body {
 }
 
 .header__nav-trigger em {
-  /* this is the menu central line */
   margin: 6px auto 14px;
   transition: background-color .2s;
 }
@@ -554,12 +548,10 @@ body {
 }
 
 .header__nav-trigger em::before {
-  /* this is the menu icon top line */
   transform: translateY(-6px);
 }
 
 .header__nav-trigger em::after {
-  /* this is the menu icon bottom line */
   transform: translateY(6px);
 }
 
@@ -579,7 +571,7 @@ body {
 .header__nav > ul {
   position: absolute;
   z-index: 2;
-  top: 60px;
+  top: 80px;
   padding: 0;
   margin: 0;
   left: 0;
@@ -591,7 +583,6 @@ body {
 }
 
 .header__nav > ul a {
-  /* target primary-nav links */
   display: block;
   height: 50px;
   line-height: 50px;
@@ -608,14 +599,11 @@ body {
 
 @media (min-width: 1200px) {
   .header__nav {
-    /* vertically align its content */
     display: table;
   }
   .header__nav > ul {
-    /* vertically align inside parent element */
     display: table-cell;
     vertical-align: middle;
-    /* reset mobile style */
     position: relative;
     width: auto;
     top: 0;
@@ -637,7 +625,6 @@ body {
     margin-right: 0;
   }
   .header__nav > ul a {
-    /* reset mobile style */
     height: auto;
     line-height: normal;
     padding: 0;
@@ -647,10 +634,6 @@ body {
 
 .header__nav-open .header__nav ul,
 .header__nav ul:target {
-  /*
-		show primary nav - mobile only
-		:target is used to show navigation on no-js devices
-	*/
   display: block;
 }
 
@@ -659,4 +642,233 @@ body {
   .header__nav ul:target {
     display: table-cell;
   }
+}
+
+.footer {
+  background: #f5f5f5;
+}
+
+.product-item {
+  position: relative;
+  margin-bottom: 2em;
+  background: #fff;
+  border-radius: .5em;
+}
+
+.product-item > div {
+  overflow: hidden;
+}
+
+.product-item::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: .5em;
+  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+  z-index: -1;
+}
+
+.product-item:hover::after {
+  opacity: 1;
+}
+
+@media (min-width: 1200px) {
+  .no-touch .product-item > div:hover .cd-dots li.selected a {
+    /* Slider dots - change background-color of the selected dot when hover over the its parent list item */
+    background: #2f2933;
+    border-color: #2f2933;
+  }
+  .no-touch .product-item > div:hover .cd-dots a {
+    /* Slider dots - change dot border-color when hover over the its parent list item */
+    border-color: #9688a0;
+  }
+  .no-touch .product-item > div:hover li.move-right,
+  .no-touch .product-item > div:hover li.move-left {
+    /* show preview items when hover over the its parent list item */
+    opacity: 0.3;
+  }
+}
+
+.product-item__wrapper {
+  position: relative;
+  overflow: hidden;
+  margin: 3em 0;
+  padding: 0;
+}
+
+.product-item__wrapper li {
+  position: absolute;
+  top: 0;
+  left: 25%;
+  height: 100%;
+  width: 50%;
+  opacity: 0;
+  list-style-type: none;
+  /* Force Hardware Acceleration */
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  will-change: transform, opacity;
+  transform: translateX(200%) scale(0.7);
+  transition: transform 0.4s, opacity ,0.4s;
+}
+
+.product-item__wrapper li.selected {
+  /* selected item */
+  position: relative;
+  opacity: 1;
+  transform: translateX(0) scale(1.3);
+}
+
+.product-item__wrapper li.move-left {
+  /* item on left - preview visible */
+  transform: translateX(-100%) scale(0.7);
+  opacity: 0.3;
+}
+
+.product-item__wrapper li.move-right {
+  /* item on right - preview visible */
+  transform: translateX(100%) scale(0.7);
+  opacity: 0.3;
+}
+
+.product-item__wrapper li.hide-left {
+  /* items hidden on the left */
+  transform: translateX(-200%) scale(0.7);
+}
+
+.product-item__wrapper li img {
+  display: block;
+  width: 100%;
+}
+
+@media (min-width: 1200px) {
+  .product-item__wrapper li.move-left,
+  .product-item__wrapper li.move-right {
+    /* hide preview items */
+    opacity: 0;
+  }
+  .product-item__wrapper li.focus-on-left {
+    /* class added to the .selected and .move-right items when user hovers over the .move-left item (item preview on the left) */
+    transform: translateX(3%) scale(1.25);
+  }
+  .product-item__wrapper li.focus-on-left.move-right {
+    transform: translateX(103%) scale(0.7);
+  }
+  .product-item__wrapper li.focus-on-right {
+    /* class added to the .selected and .move-left items when user hovers over the .move-right item (item preview on the right) */
+    transform: translateX(-3%) scale(1.25);
+  }
+  .product-item__wrapper li.focus-on-right.move-left {
+    transform: translateX(-103%) scale(0.7);
+  }
+  .product-item__wrapper li.hover {
+    /* class added to the preview items (.move-left or .move-right) when user hovers over them */
+    opacity: 1 !important;
+  }
+  .product-item__wrapper li.hover.move-left {
+    transform: translateX(-97%) scale(0.75);
+  }
+  .product-item__wrapper li.hover.move-right {
+    transform: translateX(97%) scale(0.75);
+  }
+}
+
+.product-item__dots {
+  /* not visible in the html document - created using jQuery */
+  position: absolute;
+  bottom: 95px;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  padding: .2em;
+}
+
+.product-item__dots li {
+  display: inline-block;
+  float: left;
+  margin: 0 5px;
+  pointer-events: none;
+}
+
+.product-item__dots li.selected a {
+  background: #2f2933;
+  border-color: #2f2933;
+}
+
+.product-item__dots a {
+  display: block;
+  height: 6px;
+  width: 6px;
+  border-radius: 50%;
+  border: 1px solid #9688a0;
+  /* image replacement */
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+  transition: border-color .2s, background-color .2s;
+}
+
+@media (min-width: 1200px) {
+  .product-item__dots li {
+    pointer-events: auto;
+  }
+  .product-item__dots li.selected a {
+    background: #cccccc;
+    border-color: #cccccc;
+  }
+  .product-item__dots a {
+    height: 8px;
+    width: 8px;
+    border-color: #cccccc;
+    /* fix a bug in IE9/10 - transparent anchor not clickable */
+    background-color: rgba(255, 255, 255, 0);
+  }
+}
+
+.product-item__info {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  height: 90px;
+  line-height: 90px;
+  padding: 0 2em;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.product-item__info .product-item__price,
+.product-item__info .product-item__new-price {
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.no-js .move-right,
+.no-js .move-left {
+  display: none;
+}
+
+.gallery {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: start;
+      align-items: flex-start;
+  -ms-flex-flow: row wrap;
+      flex-flow: row wrap;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  width: 100%;
+}
+
+.gallery--thirds > div {
+  width: 30%;
+}
+
+.gallery--fourths > div {
+  width: 22%;
 }

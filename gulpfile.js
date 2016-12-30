@@ -5,20 +5,26 @@ var plugins = require('gulp-load-plugins')({camelize:true});
 // Document Sass
 var sassdoc = require('sassdoc');
 var browserSync = require('browser-sync');
-
+// Include Sass
+var normalize = require('node-normalize-scss').includePaths;
 // Concats your JS files
 var browserify = require('browserify');
 var watchify = require('watchify');
 var source = require('vinyl-source-stream');
 
+// CONFIGS
+//====================================//
 
 var config = require('./config.json');
-var normalize = require('node-normalize-scss').includePaths;
+
 var path = {
 	'src': 'lib/',
 	'dest': 'src/',
 	'docs': 'docs/'
 }
+
+// FUNCTIONS
+//====================================//
 
 function handleErrors() {
 	var args = Array.prototype.slice.call(arguments);
@@ -31,13 +37,16 @@ function handleErrors() {
   this.emit('end');
 }
 
+// SASS tasks
+//===================================//
+
 gulp.task('sass', function() {
 	return gulp.src(path.src + 'scss/**/*.scss')
 		.pipe(sassdoc({
 			dest: path.docs
 		}))
 		.pipe(plugins.sass({
-			includePaths: [normalize],
+			includePaths: normalize,
 			outputStyle: 'expanded'
 		}))
 		// .on('error', handleErrors)
@@ -49,23 +58,7 @@ gulp.task('sass', function() {
 		}))
 });
 
-gulp.task('browserify', function() {
-  return browserify(path.src + 'js/app.js')
-      .bundle()
-      .on('error', handleErrors)
-      //Pass desired output filename to vinyl-source-stream
-      .pipe(source('bundle.js.liquid'))
-      // Start piping stream to tasks!
-      .pipe(gulp.dest(path.dest + 'assets/'));
-});
-
-gulp.task('images', function() {
-  return gulp.src(path.src + 'images/**')
-    .pipe(plugins.changed(path.dest + 'assets/')) // Ignore unchanged files
-    .pipe(plugins.imagemin()) // Optimize
-    .pipe(gulp.dest(path.dest + 'assets/'))
-});
-
+// Sassdocs
 gulp.task('browserSync', function() {
 	return browserSync({
 		server: {
@@ -73,6 +66,40 @@ gulp.task('browserSync', function() {
 		}
 	})
 });
+
+// JAVASCRIPT tasks
+//====================================//
+
+gulp.task('browserify', function() {
+	return browserify(path.src + 'js/app.js')
+		.bundle()
+		.on('error', handleErrors)
+		//Pass desired output filename to vinyl-source-stream
+		.pipe(source('bundle.js.liquid'))
+		// Start piping stream to tasks!
+		.pipe(gulp.dest(path.dest + 'assets/'));
+});
+
+gulp.task('vendors', function() {
+	return gulp.src(path.src + 'js/vendors/**.js')
+		.pipe(plugins.rename('vendors.js.liquid'))
+		.pipe(gulp.dest(path.dest + 'assets/'));
+});
+
+// IMAGES tasks
+//====================================//
+
+gulp.task('images', function() {
+	return gulp.src(path.src + 'images/**')
+		// Ignore unchanged files
+		.pipe(plugins.changed(path.dest + 'assets/'))
+		// Optimize
+		.pipe(plugins.imagemin())
+		.pipe(gulp.dest(path.dest + 'assets/'))
+});
+
+// WATCH tasks
+//====================================//
 
 gulp.task('watch', function() {
 	// Watch Sass Files
@@ -103,9 +130,13 @@ gulp.task('shopifyWatch', function() {
 	.pipe(plugins.shopifyUpload(config.shopify_api_key, config.shopify_password, config.shopify_url, config.shopify_theme_id, options))
 });
 
+// RUN tasks
+//====================================//
+
 gulp.task('default', [
 	'browserify',
 	'sass',
+	'vendors',
 	'browserSync',
 	'shopifyWatch',
   'watch'

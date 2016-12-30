@@ -27,6 +27,31 @@
   }
 }
 
+/// @content The center mixin centers content
+/// @param {text} xy
+/// The $xy will determines whether to center vertically, horizontal or both
+/// @example scss - for-media - Basic usage:
+///  @include center(x);
+@mixin center($xy:xy) {
+  @if $xy == xy {
+    left: 50%;
+    top: 50%;
+    bottom: auto;
+    right: auto;
+    transform: translateX(-50%) translateY(-50%);
+  }
+  @else if $xy == x {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+  @else if $xy == y {
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+  }
+}
+
 @function shade(
     $color,
     $percent

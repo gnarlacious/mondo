@@ -116,6 +116,10 @@ array-find-index@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/array-find-index/-/array-find-index-1.0.2.tgz#df010aa1287e164bbda6f9723b0a96a1ec4187a1"
 
+array-flatten@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/array-flatten/-/array-flatten-2.1.0.tgz#26a692c83881fc68dac3ec5d1f0c1b49bf2304d9"
+
 array-index@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/array-index/-/array-index-1.0.0.tgz#ec56a749ee103e4e08c790b9c353df16055b97f9"
@@ -359,6 +363,10 @@ block-stream@*:
   resolved "https://registry.yarnpkg.com/block-stream/-/block-stream-0.0.9.tgz#13ebfe778a03205cfe03751481ebb4b3300c126a"
   dependencies:
     inherits "~2.0.0"
+
+bluebird@^3.0.5:
+  version "3.4.6"
+  resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.4.6.tgz#01da8d821d87813d158967e743d5fe6c62cf8c0f"
 
 bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
   version "4.11.6"
@@ -1441,6 +1449,10 @@ es6-promise@^2.0.1:
 es6-promise@^3.0.2:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-3.3.1.tgz#a08cdde84ccdbf34d027a1451bc91d4bcd28a613"
+
+es6-shim@^0.35.1:
+  version "0.35.1"
+  resolved "https://registry.yarnpkg.com/es6-shim/-/es6-shim-0.35.1.tgz#a23524009005b031ab4a352ac196dfdfd1144ab7"
 
 es6-symbol@3, es6-symbol@^3.0.2, es6-symbol@~3.1:
   version "3.1.0"
@@ -4504,6 +4516,18 @@ sass-graph@^2.1.1:
     lodash "^4.0.0"
     yargs "^4.7.1"
 
+sass-include-paths@^4.10.0:
+  version "4.10.0"
+  resolved "https://registry.yarnpkg.com/sass-include-paths/-/sass-include-paths-4.10.0.tgz#9b06009fdfb25278ad73b43ad6e2e9333d553d39"
+  dependencies:
+    array-flatten "^2.1.0"
+    bluebird "^3.0.5"
+    es6-shim "^0.35.1"
+    glob "^7.0.0"
+    sync-exec "^0.6.2"
+    uniq "^1.0.1"
+    yargs "^6.1.1"
+
 sassdoc-extras@^2.4.0:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/sassdoc-extras/-/sassdoc-extras-2.4.1.tgz#d69c783142a8fe427c72bb32fcd652f1da03f80a"
@@ -5037,6 +5061,10 @@ swig@1.4.0:
     optimist "~0.6"
     uglify-js "~2.4"
 
+sync-exec@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/sync-exec/-/sync-exec-0.6.2.tgz#717d22cc53f0ce1def5594362f3a89a2ebb91105"
+
 syntax-error@^1.1.1:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/syntax-error/-/syntax-error-1.1.6.tgz#b4549706d386cc1c1dc7c2423f18579b6cade710"
@@ -5235,6 +5263,10 @@ unc-path-regex@^0.1.0:
 underscore@1.7.x:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.7.0.tgz#6bbaf0877500d36be34ecaa584e0db9fef035209"
+
+uniq@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/uniq/-/uniq-1.0.1.tgz#b31c5ae8254844a3a8281541ce2b04b865a734ff"
 
 unique-stream@^1.0.0:
   version "1.0.0"
@@ -5592,7 +5624,7 @@ yargs-parser@^2.4.1:
     camelcase "^3.0.0"
     lodash.assign "^4.0.6"
 
-yargs-parser@^4.0.2:
+yargs-parser@^4.0.2, yargs-parser@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-4.1.0.tgz#313df030f20124124aeae8fbab2da53ec28c56d7"
   dependencies:
@@ -5645,6 +5677,25 @@ yargs@^4.7.1:
     window-size "^0.2.0"
     y18n "^3.2.1"
     yargs-parser "^2.4.1"
+
+yargs@^6.1.1:
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/yargs/-/yargs-6.4.0.tgz#816e1a866d5598ccf34e5596ddce22d92da490d4"
+  dependencies:
+    camelcase "^3.0.0"
+    cliui "^3.2.0"
+    decamelize "^1.1.1"
+    get-caller-file "^1.0.1"
+    os-locale "^1.4.0"
+    read-pkg-up "^1.0.1"
+    require-directory "^2.1.1"
+    require-main-filename "^1.0.1"
+    set-blocking "^2.0.0"
+    string-width "^1.0.2"
+    which-module "^1.0.0"
+    window-size "^0.2.0"
+    y18n "^3.2.1"
+    yargs-parser "^4.1.0"
 
 yargs@~3.5.4:
   version "3.5.4"

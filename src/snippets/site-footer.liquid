@@ -1,0 +1,22 @@
+<footer class="footer" role="contentinfo">
+	<div class="header__brand">
+		{% if settings.brand %}
+			<a href="/">{{ settings.brand | image_url | img_tag: shop.name }}</a>
+		{% else %}
+			<a href="/">{{ shop.name }}</a>
+		{% endif %}
+	</div>
+	<div class="">
+		<ul>
+			{% for link in linklists.footer.links %}
+				<li>
+					<a href="{{link.url}}">{{link.title}}</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+	<div class="">
+		<small>&copy; {{ "now" | date: "%Y" }} {{ shop.name }}.</small><br>
+		<small>{{ powered_by_link }} • Designed by <a href="https://twitter.com/whos_dustin">@whos_dustin</a></small>
+	</div>
+</footer>

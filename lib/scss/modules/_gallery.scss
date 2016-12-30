@@ -1,0 +1,17 @@
+.gallery {
+	display: flex;
+	align-items: flex-start;
+	flex-flow: row wrap;
+	justify-content: space-around;
+	width: 100%;
+	&--thirds {
+		> div {
+			width: 30%;
+		}
+	}
+	&--fourths {
+		> div {
+			width: 22%;
+		}
+	}
+}

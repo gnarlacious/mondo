@@ -1,9 +1,10 @@
 // Main header
-// ======≠========
+// ================
 .header {
 	height: $header-height;
 	border-bottom: solid 1px shade(#FFFFFF, 5%);
 	background-color: #FFF;
+	z-index: 3;
 	&--auto-hide {
 		position: fixed;
 		top: 0;
@@ -37,23 +38,23 @@
 
 .header__nav-open .header__nav-trigger {
 	em {
-		/* transform menu icon into a 'X' icon */
+		// transform menu icon into a 'X' icon
 		background-color: rgba(#25283D, 0);
 	}
 
 	em::before {
-		/* rotate top line */
+		// rotate top line
 		transform: rotate(-45deg);
 	}
 
 	em::after {
-		/* rotate bottom line */
+		// rotate bottom line
 		transform: rotate(45deg);
 	}
 }
 
 .header__nav-trigger {
-	/* vertically align its content */
+	// vertically align its content
 	display: table;
 	height: 100%;
 	padding: 0 1em;
@@ -66,13 +67,13 @@
 	border-left: 1px solid shade(#FFFFFF, 5%);
 
 	span {
-		/* vertically align inside parent element */
+		// vertically align inside parent element
 		display: table-cell;
 		vertical-align: middle;
 	}
 
 	em, em::after, em::before {
-		/* this is the menu icon */
+		// this is the menu icon
 		display: block;
 		position: relative;
 		height: 2px;
@@ -82,7 +83,7 @@
 	}
 
 	em {
-		/* this is the menu central line */
+		// this is the menu central line
 		margin: 6px auto 14px;
 		transition: background-color .2s;
 	}
@@ -95,12 +96,12 @@
 	}
 
 	em::before {
-		/* this is the menu icon top line */
+		// this is the menu icon top line
 		transform: translateY(-6px);
 	}
 
 	em::after {
-		/* this is the menu icon bottom line */
+		// this is the menu icon bottom line
 		transform: translateY(6px);
 	}
 	@include for-media(tablet-landscape-up) {
@@ -128,7 +129,7 @@
 		box-shadow: 0 14px 20px rgba(#000, .2);
 
 		a {
-			/* target primary-nav links */
+			// target primary-nav links
 			display: block;
 			height: 50px;
 			line-height: 50px;
@@ -144,14 +145,14 @@
 		}
 	}
 	@include for-media(tablet-landscape-up) {
-		/* vertically align its content */
+		// vertically align its content
 		display: table;
 
 		> ul {
-			/* vertically align inside parent element */
+			// vertically align inside parent element
 			display: table-cell;
 			vertical-align: middle;
-			/* reset mobile style */
+			// reset mobile style
 			position: relative;
 			width: auto;
 			top: 0;
@@ -175,7 +176,7 @@
 			}
 
 			a {
-				/* reset mobile style */
+				// reset mobile style
 				height: auto;
 				line-height: normal;
 				padding: 0;
@@ -187,10 +188,8 @@
 
 .header__nav-open .header__nav ul,
 .header__nav ul:target {
-	/*
-		show primary nav - mobile only
-		:target is used to show navigation on no-js devices
-	*/
+	//	show primary nav - mobile only
+	//	:target is used to show navigation on no-js devices
 	display: block;
 
 	@include for-media(tablet-landscape-up) {
